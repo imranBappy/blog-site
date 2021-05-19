@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% endblock  %}
+{% block title %}Android stor{% endblock  %}
+{% block body %}
+    <!--Slider Start-->
+    <div class="container-fluid profile_slider" style="max-width:1324px;">
+    	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+        <div class="carousel-inner" >
+            <div class="carousel-item active ">
+                <div align="center">
+                	<h1>{% trans "Android Store" %}</h1><br>
+                	<h2>{% trans "Search Android Libraries, Projects, and Tools" %}</h2><br><br>
+                	<form method="POST" action="/search_app">
+					{% csrf_token %}
+						<input type="text" name="searchapp" placeholder="{% trans "Search your app" %}" style="height: 39px;padding: 18px;border-top-left-radius:50px;border-bottom-left-radius: 50px;border: none;outline: none;"><button type="submit" style="height:39px;border:none;width:100px;border-top-right-radius:50px;border-bottom-right-radius:50px;background:#6435c9;color:#fff;">{% trans "Search" %}</button>
+					</form>
+				</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Slider End-->
+    <!--Content Start-->
+    <div class="container" style="max-width:1324px;">
+    <div class="row">
+    	<div class="col-lg-3 col-md-3 col-sm-12 android_catecory" align="center">
+    		<h5 align="center">{% trans "Search Category Here" %}</h5>
+    		<form method="POST" action="/search_app" style="margin-bottom:25px;">
+				{% csrf_token %}
+				<input type="text" name="searchapp" placeholder="{% trans "Search your app" %}" class="s_cata"><button type="submit" class="s_btn">{% trans "Search" %}</button>
+			</form>
+			<ul>
+				{% for category in category %}
+    			<a href=""><li>{{category.category}}</li></a>
+				{% endfor %}
+    		</ul>
+    	</div>
+    	<div class="col-lg-6 col-md-6 col-sm-12">
+    		<h1 style="border:1px solid #d4d4d5; background:#f3f4f5;padding:15px; text-align: center;">{% trans "This Is a Category" %}</h1><br>
+    		{% for post in apppost %}
+			<a href="{{post.url}}" style="text-decoration: none; color: #000;">
+	    		<div class="card mb-3" style="max-width: 540px;">
+				  <div class="row g-0">
+				    <div class="col-md-4">
+				      <img src="{{post.image.url}}" alt="..." style='height: 224px; width:100%;'>
+				    </div>
+				    <div class="col-md-8">
+				      <div class="card-body">
+				        <h5 class="card-title">{{post.titel}}</h5>
+				        <p class="card-text">{{post.body}}</p>
+				        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</a><hr>
+			{% endfor %}
+    	</div>
+    	<div class="col-lg-3 col-md-3 col-sm-12 catecory_list">
+			<ul>
+				{% for applist in applist %}
+    			<a href=""><li>{{applist.lists}}</li></a>
+				{% endfor %}
+    		</ul>
+    	</div>
+    </div>
+    </div>
+    <!--Content End-->
+	<script src="{% static 'js/./script.js' %}"></script>
+{% endblock  %}

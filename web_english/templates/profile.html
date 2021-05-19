@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock  %}
+{% block title %}{% endblock  %}
+{% block body %}
+
+	{% if pro_update %}
+		<div class="alert alert-success alert-dismissible fade show container" role="alert">
+		<strong>{{pro_update}}</strong> Thank You!
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	{% endif %}
+	<!--Slider Start-->
+    <div class="container-fluid profile_slider">
+    	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+        <div class="carousel-inner" >
+            <div class="carousel-item active ">
+                <div align="center">
+                <a href="{{request.user.profilupdate.image.url}}"><img class="propic" src="{{request.user.profilupdate.image.url}}"></a>
+                <h2>{{request.user.first_name}} {{request.user.last_name}}</h2>
+                <h3><a style="color:#fff;" href="{% url 'updateprofile' %}"><ion-icon name="create"></ion-icon></a></h3>
+
+				</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Slider End-->
+{% endblock  %}

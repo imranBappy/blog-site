@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock  %}
+{% block title %}Android Course{% endblock  %}
+{% block body %}
+    <!--Slider Start-->
+    <div class="container-fluid course_slider" style="max-width:1324px;">
+    	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+        <div class="carousel-inner" >
+            <div class="carousel-item active ">
+                <div align="center">
+                	<h1>{% trans "Android App Development Online Course" %}</h1><br>
+                	<h4>{% trans "Check our online courses on Android App Development" %}</h4><br>
+				</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Slider End-->
+    <!--Content Start-->
+    <div class="container" style="max-width:1324px;">
+    	<div class="content_titel col-sm-12">
+    		{% trans "Learn Android App Development" %}
+    	</div>
+
+    	<div class="content_sub_titel col-sm-12">
+			{% trans "Millions of developers are learning at MindOrks" %}	
+    	</div>
+
+        <div class="content_head col-sm-12">
+    		<h4>{% trans "Android Development Courses" %}</h4>
+    	</div>
+    	<!--Contant body Start-->
+        <div class="content">
+			{% for contant in contant_1 %}
+        	<div class="content_1">
+        		<h2>{{contant.titel}}</h2>
+        		<p>{{contant.subtitel}}</p>
+        		<span>{{contant.subtitle2}}</span><br>
+        		<div class="Spantext" style="float:left;  margin-top:25px;">
+        			<img src="{{contant.image1}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+        			<img src="{{contant.image2}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+        		</div><br>
+        		
+        		<div class="Spantext" style="margin-left:35%;">
+        			{{contant.positons}}<br>
+        			{{contant.name1}}, {{contant.name2}}
+        		</div><br>
+        		
+        		<a href="{{contant.button_url}}"><button>Explor Now</button></a>
+        	</div>
+			{% endfor %}
+			{% for contant in contant_2 %}
+        	<div class="content_2">
+        		<h2>{{contant.titel}}</h2>
+        		<p>{{contant.subtitel}}</p>
+        		<span>{{contant.subtitle2}}</span><br>
+        		<div class="Spantext" style="float:left;  margin-top:25px;">
+        			<img src="{{contant.image1}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+        			<img src="{{contant.image2}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+        		</div><br>
+        		
+        		<div class="Spantext" style="margin-left:35%;">
+        			{{contant.positons}}<br>
+        			{{contant.name1}}, {{contant.name2}}
+        		</div><br>
+        		
+        		<a href="{{contant.button_url}}"><button>Explor Now</button></a>
+        	</div>
+			{% endfor %}
+        </div>
+        <!--clear body Start-->
+        <div class="clear"></div>
+        <!--clear body end-->
+
+    	<!--Contant body end-->
+        <!---->
+        <div class="course" style="max-width:1324px;">
+        <h3 class="blog_head">
+    		{% trans "A complete guide for learning development" %}
+    	</h3>
+		<!--Crousel course Start-->
+		<div id="carouselExampleControls" style="text-align: center;" class="carousel slide" data-bs-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+            {% for i in product|slice:"0:1" %}
+			<a href="{% url 'view_course' i.id %}">
+            <div class="card d-inline-block" style="width: 18rem;">
+			<img src="{{i.thumbnail.url}}" class="card-img-top" alt="..." height="250">
+			<div class="card-body">
+				<p class="card-text" style="text-align:left;">{{i.course_body|slice:":94"}}</p>
+			</div>
+			</div>
+			</a>
+			{% endfor %}
+            {% for i in product|slice:"1:" %}
+			<a href="{% url 'view_course' i.id %}">
+            <div class="card d-inline-block" style="width: 18rem;">
+			<img src="{{i.thumbnail.url}}" class="card-img-top" alt="..." height="250">
+			<div class="card-body">
+				<p class="card-text" style="text-align:left;">{{i.course_body|slice:":94"}}</p>
+			</div>
+			</div>
+			</a>
+            {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+             </div><div class="carousel-item">
+            {% endif%}
+
+            {% endfor %}
+      		</div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+		</div>
+		<!--Crousel course end-->
+        </div>
+        <!---->
+		<script src="{% static 'js/./script.js' %}"></script>
+{% endblock  %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock  %}
+{% block title %}Home{% endblock  %}
+{% block body %}
+	<!--Slider Start-->
+    <div class="container-fluid blog_details_slid" style="max-width:1324px;">
+    	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+        <div class="carousel-inner" >
+            <div class="carousel-item active ">
+                <h1>{% trans "Android Online Course for" %} <p style="margin:0px;padding:0px; border-bottom:4px solid rgb(245, 166, 35);display:inline-block;">{% trans "Professionals" %}</p></h1>
+                
+				<button>{% trans "Check Now" %}</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Slider End-->
+	<div class="container d_blog" style="max-width:1324px;">
+		{% for i in blog %}
+			<h1 class="d_blog_head">{{i.titel}}</h1>
+	        <img class="d_blog_img" src="{{i.image.url}}">
+	        
+	        <p class="d_blog_body">{{i.post|safe}}</p>
+    	{% endfor %}
+	</div>
+    <script src="{% static 'js/./script.js' %}"></script>
+{% endblock  %}

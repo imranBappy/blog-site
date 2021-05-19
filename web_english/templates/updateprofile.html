@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock  %}
+{% block title %}{% endblock  %}
+{% block body %}
+<!--Slider Start-->
+    <div class="container-fluid profile_slider" style="height:90vh">
+    	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+    		<h2 align="center">Update Profile</h2>
+        <div class="carousel-inner" >
+            <div class="carousel-item active ">
+                <div class="container profile col-lg-8">
+					<form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+						{{userfrom.as_p}}
+				        {{pfrom.as_p}}<br><br>
+						<button style="color:#fff;" type="submit" class="btn btn-info w-100">Update</button>
+					</form>
+				</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Slider End-->
+{% endblock  %}

@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<!--Slider Start-->
+<div class="container-fluid slider" style="max-width:1324px;">
+	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active ">
+				{% for sliderhead in sliderhead %}
+				<div class="slide_left">
+					<h1>{{sliderhead.titel}}</h1>
+					<div style="font-size:24px;color:#e5e5e5" class="sub header">{{sliderhead.subtitel}}</div>
+					<button>{% trans "Check Now" %}</button>
+				</div>
+				<div class="slide_right">
+					<img src="{{sliderhead.slide_image.url}}">
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+<!--Slider End-->
+<!--Content Start-->
+<div class="container" style="max-width:1324px;">
+	<div class="content_titel col-sm-12">
+		{% trans "Learn Android App Development" %}
+	</div>
+
+	<div class="content_sub_titel col-sm-12">
+		{% trans "Millions of developers are learning at MindOrks" %}
+	</div>
+
+	<div class="content_head col-sm-12">
+		<h4>{% trans "Android Development Courses" %}</h4>
+	</div>
+	<!--Contant body Start-->
+	<div class="content" style="margin:0 auto;">
+		{% for contant in contant_1 %}
+		<div class="content_1">
+			<h2>{{contant.titel}}</h2>
+			<p>{{contant.subtitel}}</p>
+			<span>{{contant.subtitle2}}</span><br>
+			<div class="Spantext" style="float:left;  margin-top:25px;">
+				<img src="{{contant.image1.url}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+				<img src="{{contant.image2.url}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+			</div><br>
+
+			<div class="Spantext" style="margin-left:35%;">
+				{{contant.positons}}<br>
+				{{contant.name1}}, {{contant.name2}}
+			</div><br>
+
+			<a href="{{contant.button_url}}"><button>{% trans "Explor Now" %} </button></a>
+		</div>
+		{% endfor %}
+		{% for contant in contant_2 %}
+		<div class="content_2">
+			<h2>{{contant.titel}}</h2>
+			<p>{{contant.subtitel}}</p>
+			<span>{{contant.subtitle2}}</span><br>
+			<div class="Spantext" style="float:left;  margin-top:25px;">
+				<img src="{{contant.image1.url}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+				<img src="{{contant.image2.url}}" style="width:50px;height:50px;border-radius:50px; background: #999;">
+			</div><br>
+
+			<div class="Spantext" style="margin-left:35%;">
+				{{contant.positons}}<br>
+				{{contant.name1}}, {{contant.name2}}
+			</div><br>
+
+			<a href="{{contant.button_url}}"><button>{% trans "Explor Now" %} </button></a>
+		</div>
+		{% endfor %}
+	</div>
+
+	<!--clear body Start-->
+	<div class="clear"></div>
+	<!--clear body end-->
+
+	<!--Contant body end-->
+	<h4 class="blog_head">
+		{% trans "Featured Blogs on Android App Development" %}
+	</h4>
+</div>
+</div>
+<!--Contant blog start-->
+<div id="blog" class="blog">
+	{% for blogpost in blog|slice:":blogpost.length"%}
+
+	<div id='card' class="card blog_card">
+		<a href="{% url 'details_blog' blogpost.id %}" style="text-decoration: none;color: #000;">
+			<img src="{{blogpost.image.url}}" class="card-img-top" alt="..." style="height:150px;">
+			<div class="card-body">
+				<h5>{{blogpost.titel}}</h5>
+				<span class="card-text"
+					style="text-align:justify;font-size:12px;">{{blogpost.post|slice:":200"|safe}}</span>
+			</div>
+			<hr>
+			<div style="padding: 10px;font-size: 14px;padding-top: 0px;padding-bottom: 0px;margin-left: 23%;">
+				{{blogpost.date}}
+			</div>
+		</a>
+	</div>
+
+	{% endfor %}
+</div>
+<div id="my-Blog" class="blog"></div>
+<!--Contant blog end-->
+
+<!--Content End-->
+<div style="height: 100px; width: 300px; margin-top:10px;margin:0 auto; text-align: center;">
+	<button id='blog-btn'
+		style="margin-top: 20px; cursor: pointer; background: #6435c9;width: 200px;height: 50px;color: #fff;border-radius: 16px;border: none;">{%
+		trans "See more" %}</button>
+</div>
+<!--Subscription Start-->
+<div class="Subscription" style="max-width:1324px; margin:0 auto;">
+	<div class="Subscription_image">
+		<img src="{% static 'web-templates-titan.jpg' %}">
+	</div>
+	<div class="Subscription_input">
+		<h5>{% trans "MindOrks Newsletter" %}</h5>
+		<p>{% trans "A free weekly newsletter that comes with the latest articles on Android App Development, open
+			source projects, events and useful discussions" %}</p><br><br>
+		<h5>{% trans "Subscribe Now" %}</h5><br>
+		<p>{% trans "A must have weekly newsletter to become a complete Android developer" %}</p>
+		<form method="POST">
+			{% csrf_token %}
+			<input type="email" name="Subscription_email" placeholder="{% trans " Your Email" %}"><button
+				type="submit">{% trans "Subscribe" %} </button>
+		</form>
+	</div>
+</div>
+<!--Subscription End-->
+<!--Our tem Start-->
+<div class="our_tem col-lg-12 col-md-12" style="max-width:1324px; margin:0 auto;">
+	<h1 align="center">{% trans "Our Team" %}</h1>
+	<div class="row">
+		{% for our_team in team %}
+		<div class="col-lg-4 col-md-4 col-sm-12 our_tem_cade" style="background: #fff;height: 300px;">
+			<img src="{{our_team.image.url}}">
+			<h5>{{our_team.name}}</h5>
+			<p>{{our_team.position}}</p>
+			<p>{{our_team.education}}</p>
+			<a href="{{our_team.fb}}">
+				<ion-icon name="logo-facebook"></ion-icon>
+			</a>
+			<a href="{{our_team.lin}}">
+				<ion-icon name="logo-twitter"></ion-icon>
+			</a>
+			<a href="{{our_team.git}}">
+				<ion-icon name="logo-github"></ion-icon>
+			</a>
+			<a href="{{our_team.tw}}">
+				<ion-icon name="logo-linkedin"></ion-icon>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+<!--Our tem end-->
+<script>
+	const blogBtn = document.getElementById('blog-btn');
+	blogBtn.addEventListener('click', (e) => {
+		console.log(2000);
+		cardManage(3)
+	})
+	const cardManage = length => {
+		const card = document.querySelectorAll('#card');
+		const blog = document.getElementById('blog');
+		const myBlog = document.getElementById('my-Blog');
+		blog.style = 'display: none'
+		for (let i = 0; i < length; i++) {
+			const element = card[i];
+			myBlog.appendChild(element)
+		}
+	}
+	cardManage(3);
+
+</script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+<script src="{% static 'js/./script.js' %}"></script>
+{% endblock %}

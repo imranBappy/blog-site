@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock  %}
+{% block title %}Blog{% endblock  %}
+{% block body %}
+ <!--Slider Start-->
+    <div class="container-fluid slider">
+    	<div id="carouselExampleSlidesOnly" class="carousel slide container-fluid" data-bs-ride="carousel">
+        <div class="carousel-inner" >
+            <div class="carousel-item active ">
+			{% for sliderhead in sliderhead %}
+                <div class="slide_left">
+                	<h1>{{sliderhead.titel}}</h1>
+                	<div style="font-size:24px;color:#e5e5e5" class="sub header">{{sliderhead.subtitel}}</div>
+					<button>{% trans "Check Now" %}</button>
+                </div>
+                <div class="slide_right">
+                	<img src="{{sliderhead.slide_image}}">
+                </div>
+			{% endfor %}
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Slider End-->
+    <!--Content Start-->
+    <div class="container">
+    	<div class="content_titel col-sm-12">
+    	{% trans "Blog Category" %}	 {% for i in blog|slice:':1' %}"{{i.category}}"{% endfor %}
+    	</div>
+    </div>
+    <!--Blog category Start-->
+    <div class="container-fluid">
+    	<div class="category">
+    		<ul>
+    			<li><a href="{% url 'blog' %}"> Letest</a></li>
+				{% for i in category %}
+    			<li><a href="{% url 'category' i.category %}">{{i.category}}</a></li>
+				{% endfor %}
+    		</ul>
+    	</div>
+    </div>
+    <!--Blog category End-->
+    <!--Contant blog start-->
+    	<div class="blog">
+    	<div class="row blog_row">
+    		{% for blogpost in blog|slice:":6" %}
+			
+    		<div class="card blog_card">
+    		<a href="{% url 'details_blog' blogpost.id %}" style="text-decoration: none;color: #000;">
+			  <img src="{{blogpost.image.url}}" class="card-img-top" alt="..." style="height:150px;">
+			  <div class="card-body">
+			  	<h5>{{blogpost.titel}}</h5>
+			    <span class="card-text" style="text-align:justify;font-size:12px;">{{blogpost.post|slice:":200"|safe}}</span>
+			  </div><hr>
+			  <div style="padding: 10px;font-size: 14px;padding-top: 0px;padding-bottom: 0px;margin-left: 23%;">
+			  	{{blogpost.date}}
+			  </div>
+			</a>
+			</div>
+			
+		{% endfor %}
+        </div>
+    	</div>
+    	<!--Contant blog end-->
+{% endblock  %}
